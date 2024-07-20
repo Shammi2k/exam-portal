@@ -56,4 +56,28 @@ public class UserServiceImpl
     dbUser = userRepository.save(user);
     return dbUser;
   }
+
+  @Override
+  public User getUserByUsername(String username)
+  {
+    return userRepository.findByUsername(username);
+  }
+
+  @Override
+  public void deleteUserById(Long id)
+  {
+    userRepository.deleteById(id);
+  }
+
+  @Override
+  public User updateUserById(User user)
+  {
+    return userRepository.save(user);
+  }
+
+  @Override
+  public void deleteAllUsers()
+  {
+    userRepository.deleteAll();
+  }
 }
