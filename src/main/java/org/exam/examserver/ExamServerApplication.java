@@ -27,23 +27,23 @@ public class ExamServerApplication
     throws Exception
   {
     System.out.println("====================Starting CLI========================");
-    User user = new User();
-    user.setFirstName("Shammi");
-    user.setLastName("Agarwal");
-    user.setUsername("sam");
-    user.setPassword("1234");
-    user.setEmail("abc@gmail.com");
-    user.setPhone("12345678");
-    user.setProfile("default.png");
-
-    Role role = new Role();
-    role.setName("ADMIN");
-
-    UserRole userRole = new UserRole();
-    userRole.setUser(user);
-    userRole.setRole(role);
-
-    System.out.println(userService.createUser(user, new HashSet<>(Collections.singleton(userRole))).toString());
+//    User user = new User();
+//    user.setFirstName("Shammi");
+//    user.setLastName("Agarwal");
+//    user.setUsername("sam");
+//    user.setPassword("1234");
+//    user.setEmail("abc@gmail.com");
+//    user.setPhone("12345678");
+//    user.setProfile("default.png");
+//
+//    Role role = new Role();
+//    role.setName("ADMIN");
+//
+//    UserRole userRole = new UserRole();
+//    userRole.setUser(user);
+//    userRole.setRole(role);
+//
+//    System.out.println(userService.createUser(user, new HashSet<>(Collections.singleton(userRole))).toString());
   }
 
   @Autowired
