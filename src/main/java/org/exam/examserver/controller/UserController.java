@@ -9,6 +9,7 @@ import org.exam.examserver.model.User;
 import org.exam.examserver.model.UserRole;
 import org.exam.examserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/user")
+@CrossOrigin(origins = "http://localhost:4200")
 public class UserController
 {
   private UserService userService;
@@ -28,6 +30,7 @@ public class UserController
   public User createUserWithNormalRole(@RequestBody User user)
     throws Exception
   {
+    user.setProfile("default.png");
     Role role = new Role("NORMAL");
     Set<UserRole> userRoles = new HashSet<>(Collections.singleton(new UserRole(user, role)));
     return userService.createUser(user, userRoles);
