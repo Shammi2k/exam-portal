@@ -1,5 +1,6 @@
 package org.exam.examserver.model;
 
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,9 +12,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 @Entity(name = "users")
 public class User
+  implements UserDetails
 {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -57,6 +61,7 @@ public class User
     this.id = id;
   }
 
+  @Override
   public String getUsername()
   {
     return username;
@@ -67,6 +72,7 @@ public class User
     this.username = username;
   }
 
+  @Override
   public String getPassword()
   {
     return password;
@@ -117,6 +123,7 @@ public class User
     this.phone = phone;
   }
 
+  @Override
   public boolean isEnabled()
   {
     return enabled;
@@ -162,5 +169,14 @@ public class User
       ", profile='" + profile + '\'' +
       ", userRoles=" + userRoles +
       '}';
+  }
+
+  @Override
+  @JsonIgnore
+  public Collection<? extends GrantedAuthority> getAuthorities()
+  {
+    Set<Role> roles = new HashSet<>();
+    userRoles.forEach(userRole -> roles.add(userRole.getRole()));
+    return roles;
   }
 }

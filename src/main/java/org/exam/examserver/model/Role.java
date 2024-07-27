@@ -11,10 +11,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.UniqueConstraint;
+import org.springframework.security.core.GrantedAuthority;
 
 @Entity(name = "roles")
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = { "name" }))
 public class Role
+  implements GrantedAuthority
 {
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
@@ -60,5 +62,11 @@ public class Role
   public void setUserRoles(Set<UserRole> userRoles)
   {
     this.userRoles = userRoles;
+  }
+
+  @Override
+  public String getAuthority()
+  {
+    return name;
   }
 }

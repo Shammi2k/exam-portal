@@ -9,14 +9,25 @@ import org.exam.examserver.repo.RoleRepository;
 import org.exam.examserver.repo.UserRepository;
 import org.exam.examserver.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UserServiceImpl
-  implements UserService
+  implements UserService, UserDetailsService
 {
   private UserRepository userRepository;
   private RoleRepository roleRepository;
+  private final BCryptPasswordEncoder passwordEncoder;
+
+  @Autowired
+  public UserServiceImpl(BCryptPasswordEncoder passwordEncoder)
+  {
+    this.passwordEncoder = passwordEncoder;
+  }
 
   @Autowired
   public void setUserRepository(UserRepository userRepository)
@@ -39,6 +50,7 @@ public class UserServiceImpl
     {
       throw new Exception("User already exists in db");
     }
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     for (UserRole userRole : userRoles)
     {
       // Check if role already exists, update the userRole value
@@ -79,5 +91,12 @@ public class UserServiceImpl
   public void deleteAllUsers()
   {
     userRepository.deleteAll();
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String username)
+    throws UsernameNotFoundException
+  {
+    return getUserByUsername(username);
   }
 }
