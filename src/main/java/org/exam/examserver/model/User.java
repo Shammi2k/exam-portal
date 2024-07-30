@@ -23,6 +23,7 @@ public class User
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Long id;
   private String username;
+  @JsonIgnore
   private String password;
   private String firstName;
   private String lastName;
@@ -172,7 +173,6 @@ public class User
   }
 
   @Override
-  @JsonIgnore
   public Collection<? extends GrantedAuthority> getAuthorities()
   {
     Set<Role> roles = new HashSet<>();

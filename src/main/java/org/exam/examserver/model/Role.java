@@ -3,6 +3,7 @@ package org.exam.examserver.model;
 import java.util.HashSet;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -23,6 +24,7 @@ public class Role
   private Long id;
   private String name;
   @OneToMany(cascade = CascadeType.ALL, mappedBy = "role")
+  @JsonIgnore
   private Set<UserRole> userRoles = new HashSet<>();
 
   public Role()
