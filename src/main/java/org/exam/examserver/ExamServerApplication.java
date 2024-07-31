@@ -19,13 +19,13 @@ public class ExamServerApplication
 //  {
 //    System.out.println("====================Starting CLI========================");
 //    User user = new User();
-//    user.setFirstName("Shammi");
-//    user.setLastName("Agarwal");
-//    user.setUsername("sam");
-//    user.setPassword("1234");
-//    user.setEmail("abc@gmail.com");
-//    user.setPhone("12345678");
-//    user.setProfile("default.png");
+//    user.setFirstName("Admin");
+//    user.setLastName("Admin");
+//    user.setUsername("admin");
+//    user.setPassword("admin");
+//    user.setEmail("admin@admin.com");
+//    user.setPhone("0000000000");
+//    user.setProfile("admin.png");
 //
 //    Role role = new Role();
 //    role.setName("ADMIN");
