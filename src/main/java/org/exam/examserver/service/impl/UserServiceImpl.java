@@ -44,7 +44,6 @@ public class UserServiceImpl
 
   @Override
   public User createUser(User user, Set<UserRole> userRoles)
-    throws Exception
   {
     User dbUser = userRepository.findByUsername(user.getUsername());
     if (dbUser != null)
