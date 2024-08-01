@@ -2,6 +2,7 @@ package org.exam.examserver.service.impl;
 
 import java.util.Set;
 
+import org.exam.examserver.exception.UserAlreadyExistException;
 import org.exam.examserver.model.Role;
 import org.exam.examserver.model.User;
 import org.exam.examserver.model.UserRole;
@@ -48,7 +49,7 @@ public class UserServiceImpl
     User dbUser = userRepository.findByUsername(user.getUsername());
     if (dbUser != null)
     {
-      throw new Exception("User already exists in db");
+      throw new UserAlreadyExistException();
     }
     user.setPassword(passwordEncoder.encode(user.getPassword()));
     for (UserRole userRole : userRoles)
