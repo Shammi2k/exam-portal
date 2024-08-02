@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -59,6 +60,29 @@ public class UserController
   {
     user.setId(userId);
     return userService.updateUserById(user);
+  }
+
+  @PatchMapping("/{userId}")
+  public User patchUserById(@PathVariable Long userId, @RequestBody User user)
+  {
+    User updatedUser = userService.getUserById(userId);
+    if (user.getEmail() != null)
+    {
+      updatedUser.setEmail(user.getEmail());
+    }
+    if (user.getFirstName() != null)
+    {
+      updatedUser.setFirstName(user.getFirstName());
+    }
+    if (user.getLastName() != null)
+    {
+      updatedUser.setLastName(user.getLastName());
+    }
+    if (user.getPhone() != null)
+    {
+      updatedUser.setPhone(user.getPhone());
+    }
+    return userService.updateUserById(updatedUser);
   }
 
   @Autowired

@@ -76,6 +76,12 @@ public class UserServiceImpl
   }
 
   @Override
+  public User getUserById(Long id)
+  {
+    return userRepository.getReferenceById(id);
+  }
+
+  @Override
   public void deleteUserById(Long id)
   {
     userRepository.deleteById(id);
