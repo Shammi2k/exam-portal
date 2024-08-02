@@ -9,6 +9,13 @@ public class UserAlreadyExistException
 {
   public UserAlreadyExistException()
   {
-    super(HttpStatus.CONFLICT, ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, "User already exists in db"), null);
+    super(HttpStatus.CONFLICT, problemDetailFrom("User with this username already exists in database. Please try registration with a different username"), null);
+  }
+
+  private static ProblemDetail problemDetailFrom(String message)
+  {
+    ProblemDetail problemDetail = ProblemDetail.forStatusAndDetail(HttpStatus.CONFLICT, message);
+    problemDetail.setTitle("Username is already in use");
+    return problemDetail;
   }
 }
